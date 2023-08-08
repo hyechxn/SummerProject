@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4706120260749398429}
   - component: {fileID: 2193888847064515318}
   - component: {fileID: -4515705480411470161}
+  - component: {fileID: -5661386969532343599}
   m_Layer: 0
   m_Name: BulletLv2
   m_TagString: Untagged
@@ -106,3 +107,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &-5661386969532343599
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138614094513343146}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.47319376, y: 1}
+  m_Direction: 0

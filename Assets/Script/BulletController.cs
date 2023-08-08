@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BulletController: MonoBehaviour
 {
-    private int BulletSpeed;
+    private int BulletSpeed=1000;
     public GameObject Bullet;
     void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1000) );
-        Destroy(Bullet, 1f);
+        GetComponent<Rigidbody2D>().AddForce(Vector2.up* BulletSpeed);
+        Destroy(Bullet, 0.5f);
     }
 }

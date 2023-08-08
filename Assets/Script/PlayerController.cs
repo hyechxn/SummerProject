@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet3;
     public GameObject bullet4;
     public GameObject bullet5;
+
+    public int HP;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
