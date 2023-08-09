@@ -16,6 +16,14 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet4;
     public GameObject bullet5;
 
+
+    private bool isTouchTop;
+    private bool isTouchBottom;
+    private bool isTouchLeft;
+    private bool isTouchRight;
+    private float h;
+    private float v;
+
     public int HP;
     void Start()
     {
@@ -24,49 +32,103 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
+        
 
-        playerPosition.x = Time.deltaTime * moveSpeed * Input.GetAxis("Horizontal");
-        if(Input.GetAxis("Horizontal") < 0)
+        
+        if ((isTouchLeft &&  h == -1) || (isTouchRight && h==1))
         {
-            spriteRenderer.sprite = Move[2];
+            h = 0;
         }
-        else if (Input.GetAxis("Horizontal") > 0)
+        
+        if ((isTouchTop && v == 1) || (isTouchBottom && v == -1))
         {
-            spriteRenderer.sprite = Move[1];
+            v = 0;
         }
-        else
-        {
-            spriteRenderer.sprite = Move[0];
-        }
-        playerPosition.y = Time.deltaTime * moveSpeed * Input.GetAxis("Vertical");
 
-        transform.Translate(playerPosition);
+           
+        if(h < 0)
+            {
+                spriteRenderer.sprite = Move[2];
+            }
+        else if (h > 0)
+            {
+                spriteRenderer.sprite = Move[1];
+            }
+            else
+            {
+                spriteRenderer.sprite = Move[0];
+            }
 
+        Vector3 movement = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
+        transform.Translate(movement);
         if (Input.GetButtonDown("Fire1"))
+            {
+                if (bulletLevel == 1)
+                {
+                    Instantiate(bullet1, transform.position, transform.rotation);
+                }
+                else if (bulletLevel == 2)
+                {
+                    Instantiate(bullet2, transform.position, transform.rotation);
+                }
+                else if (bulletLevel == 3)
+                {
+                    Instantiate(bullet3, transform.position, transform.rotation);
+                }
+                else if (bulletLevel == 4)
+                {
+                    Instantiate(bullet4, transform.position, transform.rotation);
+                }
+                else if (bulletLevel >= 5)
+                {
+                    Instantiate(bullet5, transform.position, transform.rotation);
+                }
+            }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Wall")
         {
-            if (bulletLevel == 1)
-            {
-                Instantiate(bullet1, transform.position, transform.rotation);
-            }
-            else if (bulletLevel == 2)
-            {
-                Instantiate(bullet2, transform.position, transform.rotation);
-            }
-            else if (bulletLevel == 3)
-            {
-                Instantiate(bullet3, transform.position, transform.rotation);
-            }
-            else if (bulletLevel == 4)
-            {
-                Instantiate(bullet4, transform.position, transform.rotation);
-            }
-            else if (bulletLevel >= 5)
-            {
-                Instantiate(bullet5, transform.position, transform.rotation);
+            switch(other.gameObject.name) {
+                case "Top":
+                    isTouchTop = true; 
+                    break;
+                case "Bottom":
+                    isTouchBottom = true;
+                    break;
+                case "Left":
+                    isTouchLeft = true;
+                    break;
+                case "Right":
+                    isTouchRight = true;
+                    break;
             }
         }
     }
 
-    
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Wall")
+        {
+            switch (other.gameObject.name)
+            {
+                case "Top":
+                    isTouchTop = false;
+                    break;
+                case "Bottom":
+                    isTouchBottom = false;
+                    break;
+                case "Left":
+                    isTouchLeft = false;
+                    break;
+                case "Right":
+                    isTouchRight = false;
+                    break;
+            }
+        }
+    }
 }
