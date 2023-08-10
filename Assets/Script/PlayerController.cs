@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     public Vector3 playerPosition;
     private float moveSpeed = 8f;
-    public Sprite[] Move;
     private SpriteRenderer spriteRenderer;
     public int bulletLevel = 3;
 
@@ -25,8 +24,11 @@ public class PlayerController : MonoBehaviour
     private float v;
 
     public int HP;
-    void Start()
+
+    private Animator anim;
+    void Awake()
     {
+        anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerPosition = transform.position;
     }
@@ -47,20 +49,6 @@ public class PlayerController : MonoBehaviour
         {
             v = 0;
         }
-
-           
-        if(h < 0)
-            {
-                spriteRenderer.sprite = Move[2];
-            }
-        else if (h > 0)
-            {
-                spriteRenderer.sprite = Move[1];
-            }
-            else
-            {
-                spriteRenderer.sprite = Move[0];
-            }
 
         Vector3 movement = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
         transform.Translate(movement);
@@ -87,6 +75,10 @@ public class PlayerController : MonoBehaviour
                     Instantiate(bullet5, transform.position, transform.rotation);
                 }
             }
+
+        if((Input.GetButtonDown("Horizontal")) || (Input.GetButtonUp("Horizontal"))){
+            anim.SetInteger("Input", (int)h);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

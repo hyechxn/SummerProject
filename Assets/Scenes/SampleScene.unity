@@ -528,6 +528,7 @@ GameObject:
   - component: {fileID: 457381487}
   - component: {fileID: 457381486}
   - component: {fileID: 457381488}
+  - component: {fileID: 457381489}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -662,10 +663,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {x: 0, y: 0, z: 0}
-  Move:
-  - {fileID: -293078460, guid: 666492242d4e9314a8ef6cabab04b8f9, type: 3}
-  - {fileID: -1359346273, guid: 666492242d4e9314a8ef6cabab04b8f9, type: 3}
-  - {fileID: -2107730146, guid: 666492242d4e9314a8ef6cabab04b8f9, type: 3}
   bulletLevel: 1
   bullet1: {fileID: 6455808349593913222, guid: a33871c6653550344a410a6df97bd189, type: 3}
   bullet2: {fileID: 2138614094513343146, guid: b2accec5afbe2c64d9c2ccdc9cdbf9d9, type: 3}
@@ -673,6 +670,27 @@ MonoBehaviour:
   bullet4: {fileID: 7315950430851216994, guid: 757327262c8398e4083a26173b63ace2, type: 3}
   bullet5: {fileID: 5578664322680648325, guid: f66372d08b5e7b949b5821ef53551610, type: 3}
   HP: 0
+--- !u!95 &457381489
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457381483}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0633661d885c014db7ad314634b3cfa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
