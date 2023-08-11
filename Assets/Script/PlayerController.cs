@@ -34,14 +34,19 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
+        Move();
+        Fire();
+    }
+    void Move()
+    {
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
         
 
         
         if ((isTouchLeft &&  h == -1) || (isTouchRight && h==1))
-        {
+        {     
             h = 0;
         }
         
@@ -50,37 +55,40 @@ public class PlayerController : MonoBehaviour
             v = 0;
         }
 
-        Vector3 movement = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
-        transform.Translate(movement);
-        if (Input.GetButtonDown("Fire1"))
-            {
-                if (bulletLevel == 1)
-                {
-                    Instantiate(bullet1, transform.position, transform.rotation);
-                }
-                else if (bulletLevel == 2)
-                {
-                    Instantiate(bullet2, transform.position, transform.rotation);
-                }
-                else if (bulletLevel == 3)
-                {
-                    Instantiate(bullet3, transform.position, transform.rotation);
-                }
-                else if (bulletLevel == 4)
-                {
-                    Instantiate(bullet4, transform.position, transform.rotation);
-                }
-                else if (bulletLevel >= 5)
-                {
-                    Instantiate(bullet5, transform.position, transform.rotation);
-                }
-            }
+            Vector3 movement = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
+            transform.Translate(movement);
 
-        if((Input.GetButtonDown("Horizontal")) || (Input.GetButtonUp("Horizontal"))){
+        if ((Input.GetButtonDown("Horizontal")) || (Input.GetButtonUp("Horizontal")))
+        {
             anim.SetInteger("Input", (int)h);
         }
     }
-
+    void Fire()
+{
+    if (Input.GetButtonDown("Fire1"))
+    {
+        if (bulletLevel == 1)
+        {
+            Instantiate(bullet1, transform.position, transform.rotation);
+        }
+        else if (bulletLevel == 2)
+        {
+            Instantiate(bullet2, transform.position, transform.rotation);
+        }
+        else if (bulletLevel == 3)
+        {
+            Instantiate(bullet3, transform.position, transform.rotation);
+        }
+        else if (bulletLevel == 4)
+        {
+            Instantiate(bullet4, transform.position, transform.rotation);
+        }
+        else if (bulletLevel >= 5)
+        {
+            Instantiate(bullet5, transform.position, transform.rotation);
+        }
+    }
+}
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Wall")

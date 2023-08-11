@@ -108,10 +108,10 @@ TextureImporter:
       name: Bullets_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 10
-        height: 12
+        x: 3
+        y: 5
+        width: 4
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,9 +130,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 0
+        y: 2
         width: 10
-        height: 12
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,9 +150,9 @@ TextureImporter:
       name: Bullets_2
       rect:
         serializedVersion: 2
-        x: 55
+        x: 58
         y: 0
-        width: 10
+        width: 4
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -171,12 +171,12 @@ TextureImporter:
       name: Bullets_3
       rect:
         serializedVersion: 2
-        x: 44
-        y: 0
-        width: 10
-        height: 12
-      alignment: 9
-      pivot: {x: 0.25331154, y: 0.5083907}
+        x: 35
+        y: 3
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Bullets_4
       rect:
         serializedVersion: 2
-        x: 33
-        y: 0
-        width: 10
-        height: 12
+        x: 46
+        y: 4
+        width: 6
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,9 +213,9 @@ TextureImporter:
       name: Bullets_5
       rect:
         serializedVersion: 2
-        x: 22
+        x: 25
         y: 0
-        width: 10
+        width: 4
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -234,10 +234,10 @@ TextureImporter:
       name: Bullets_6
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 10
-        height: 12
+        x: 12
+        y: 1
+        width: 8
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,6 +269,7 @@ TextureImporter:
       Bullets_4: -462655498
       Bullets_5: 56677938
       Bullets_6: 1983423094
+      Bullets_7: 1401428802
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
