@@ -9,11 +9,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public int bulletLevel = 3;
 
-    public GameObject bullet1;
-    public GameObject bullet2;
-    public GameObject bullet3;
-    public GameObject bullet4;
-    public GameObject bullet5;
+    public GameObject bulletS;
+    public GameObject bulletM;
+    public GameObject bulletL;
 
 
     private bool isTouchTop;
@@ -26,6 +24,10 @@ public class PlayerController : MonoBehaviour
     public int HP;
 
     private Animator anim;
+
+    private bool isFire;
+    private float delayTime = 0.1f;
+    private float delay;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -65,29 +67,53 @@ public class PlayerController : MonoBehaviour
     }
     void Fire()
 {
-    if (Input.GetButtonDown("Fire1"))
-    {
-        if (bulletLevel == 1)
+        if (isFire == false)
         {
-            Instantiate(bullet1, transform.position, transform.rotation);
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (bulletLevel == 1)
+                {
+                    Instantiate(bulletS, transform.position, transform.rotation);
+                }
+                else if (bulletLevel == 2)
+                {
+                    Instantiate(bulletS, transform.position + Vector3.right * 0.25f, transform.rotation);
+                    Instantiate(bulletS, transform.position + Vector3.left * 0.25f, transform.rotation);
+                }
+                else if (bulletLevel == 3)
+                {
+                    Instantiate(bulletS, transform.position + Vector3.right * 0.5f, transform.rotation);
+                    Instantiate(bulletS, transform.position + Vector3.left * 0.5f, transform.rotation);
+                    Instantiate(bulletM, transform.position + Vector3.up *0.3f, transform.rotation);
+                }
+                else if (bulletLevel == 4)
+                {
+                    Instantiate(bulletS, transform.position + Vector3.right * 0.5f, transform.rotation);
+                    Instantiate(bulletS, transform.position + Vector3.left * 0.5f, transform.rotation);
+                    Instantiate(bulletL, transform.position + Vector3.up * 0.3f, transform.rotation);
+                }
+                else if (bulletLevel >= 5)
+                {
+                    Instantiate(bulletS, transform.position + Vector3.right * 1f, transform.rotation);
+                    Instantiate(bulletS, transform.position + Vector3.left * 1f, transform.rotation);
+                    Instantiate(bulletM, transform.position + Vector3.right * 0.5f + Vector3.up * 0.3f, transform.rotation);
+                    Instantiate(bulletM, transform.position + Vector3.left * 0.5f + Vector3.up * 0.3f, transform.rotation);
+                    Instantiate(bulletL, transform.position + Vector3.up * 0.6f, transform.rotation);
+                }
+
+                isFire = true;
+            }
         }
-        else if (bulletLevel == 2)
+        if (isFire == true)
         {
-            Instantiate(bullet2, transform.position, transform.rotation);
+            delay+= Time.deltaTime;
         }
-        else if (bulletLevel == 3)
+        if (delayTime <= delay)
         {
-            Instantiate(bullet3, transform.position, transform.rotation);
+            isFire = false;
+            delay= 0f;
         }
-        else if (bulletLevel == 4)
-        {
-            Instantiate(bullet4, transform.position, transform.rotation);
-        }
-        else if (bulletLevel >= 5)
-        {
-            Instantiate(bullet5, transform.position, transform.rotation);
-        }
-    }
+        
 }
     void OnTriggerEnter2D(Collider2D other)
     {
