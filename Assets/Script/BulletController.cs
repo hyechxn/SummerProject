@@ -11,4 +11,9 @@ public class BulletController: MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(Vector2.up* BulletSpeed);
         Destroy(Bullet, 0.5f);
     }
+    void Update()
+    {
+        if (gameObject.name == "BulletLv1(Clone)")
+            Debug.Log("ÀÌÀ×");
+    }
 }
