@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public int Level;
 
     public GameObject player;
-
+    public GameObject Score;
     private int score;
     private float directTime= 1f;
     private float nextTime;
@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
             score = 1000;
             dmg = 20;
         }
+        Score = GameObject.Find("Score Text");
         player = GameObject.Find("Player");
         painBar = GameObject.Find("Pain Bar");
         ui = painBar.GetComponent<UI>();
@@ -122,7 +123,7 @@ public class Enemy : MonoBehaviour
         Invoke("Resetsprite", 0.05f);
         if (health <= 0)
         {
-            player.GetComponent<PlayerController>().Score += score;   
+            Score.GetComponent<UI>().score += score;   
             Destroy(gameObject);
         }
     }

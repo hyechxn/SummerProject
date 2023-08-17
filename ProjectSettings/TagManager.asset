@@ -11,6 +11,7 @@ TagManager:
   - EnemyBullet
   - MIne
   - Item
+  - ItemSpawn
   layers:
   - Default
   - TransparentFX

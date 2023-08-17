@@ -27,10 +27,23 @@ public class UI : MonoBehaviour
 
     void Update()
     {
-        hpBar.value = (float)CurHp / (float)MaxHp;
-        painBar.value = (float)CurPain / (float)MaxPain;
+        if (gameObject.name == "HP Bar")
+        {
+            hpBar.value = (float)CurHp / MaxHp;
+        }
+        if (gameObject.name == "Pain Bar")
+        {
+            painBar.value = (float)CurPain / MaxPain;
+        }
 
-        tMP.text = "Score : "+score  ;
+        if (gameObject.name == "Score Text")
+        {
+
+            tMP.text = "Score : " + score;
+        }
+        
+
+       
     }
 
 }
