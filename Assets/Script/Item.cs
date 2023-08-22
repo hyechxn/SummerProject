@@ -24,7 +24,7 @@ public class Item : MonoBehaviour
 
         if (gameObject.tag == "Item")
         {
-            int RandomItem = Random.Range(0, 4);
+            int RandomItem = Random.Range(0, 5);
             thisType = type[RandomItem];
 
             rigid = GetComponent<Rigidbody2D>();

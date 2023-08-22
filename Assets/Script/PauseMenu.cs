@@ -11,6 +11,11 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void RankingPage()
+    {
+        SceneManager.LoadScene("RankingPage");
+    }
     public void Exit()
     {
         Application.Quit();

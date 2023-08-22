@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public float maxItemSpawnDelay = 20f;
     private float curItemSpawnDelay;
 
+    public GameObject bossHealthBar;
+
     public int enemyNum;
 
     void Start()
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
             {
                 Vector3 trans = new Vector3(0f, 8f, 0f);
                 Instantiate(BossEnem, trans, transform.rotation);
+                ui.bossHealth.SetActive(true);
                 bossCount = 0;
                 isBoss = true;
             }
@@ -141,12 +144,10 @@ public class GameManager : MonoBehaviour
     }
     void GameOverCheck()
     {
-        Debug.Log("메서드 밖");
         if (ui.CurHp <= 0 || ui.CurPain >= 300)
         {
             isPaused= true;
             GameOver();
-            Debug.Log("메서드 속");
         }
     }
     void GameOver()

@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 
     Animator anim;
 
-    private UI NameOfItem;
+    private UI um;
     private GameManager gm;
     void Awake()
     {
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
         UIManager = GameObject.Find("UI Manager");
         gameManager = GameObject.Find("GameManager");
         player = GameObject.Find("Player");
-        NameOfItem = UIManager.GetComponent<UI>();
+        um = UIManager.GetComponent<UI>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         initialPlayerPosition = player.transform.position;
         gm = gameManager.GetComponent<GameManager>();
@@ -104,6 +104,7 @@ public class Enemy : MonoBehaviour
     {
         if (Level == 10)
         {
+            um.CurBossHealth = health;
             if (this.transform.position.y <= 2f)
             {
                 rigid.velocity = Vector2.zero;
@@ -309,8 +310,8 @@ public class Enemy : MonoBehaviour
         spriteRenderer.sprite = sprites[1];
         Invoke("Resetsprite", 0.05f);
         if (health <= 0) {
-
-            UIManager.GetComponent<UI>().score += score;   
+            um.CurBossHealth = 0;
+            um.score += score;   
             Destroy(gameObject);
         }
     }
@@ -323,7 +324,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.tag == "Wall" && Level != 10) 
         {
-            NameOfItem.CurPain += dmg/2;
+            um.CurPain += dmg/2;
             Destroy(gameObject);
         }
         else if (collision.tag == "PlayerBullet")

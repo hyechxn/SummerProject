@@ -66,9 +66,9 @@ TagManager:
   - name: Monster
     uniqueID: 783995073
     locked: 0
-  - name: Fade
-    uniqueID: 1637187827
-    locked: 0
   - name: UI
     uniqueID: 2553574837
+    locked: 0
+  - name: Fade
+    uniqueID: 1637187827
     locked: 0
