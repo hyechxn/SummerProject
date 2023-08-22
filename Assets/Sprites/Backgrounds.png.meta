@@ -167,6 +167,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Backgrounds_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 246
+        width: 10
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a58fa22fb9e8ef74ca387c686b3db06a
+      internalID: -1438120182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline:
     - - {x: -217, y: -144}
       - {x: 217, y: -144}

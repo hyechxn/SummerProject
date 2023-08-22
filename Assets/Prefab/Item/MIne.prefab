@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 9072894758387380298}
   - component: {fileID: 9072894758387380297}
   - component: {fileID: 9072894758387380296}
+  - component: {fileID: -8234184465971972607}
   m_Layer: 0
-  m_Name: MIne
-  m_TagString: MIne
+  m_Name: Mine
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,3 +124,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-8234184465971972607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9072894758387380301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e767f33da99334aa6c8d58b4974ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: []
+  thisType: 
+  ui: {fileID: 0}
+  item: {fileID: 4191231183202844505, guid: d7524237136d0d543adfa915d1208505, type: 3}
+  UIManager: {fileID: 0}
+  Direction: 

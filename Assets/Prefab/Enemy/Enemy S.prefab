@@ -144,4 +144,11 @@ MonoBehaviour:
   bulletA: {fileID: 5328488215937943154, guid: e4c6c88884d64764db849c50417b6068, type: 3}
   bulletB: {fileID: 2378835644085557570, guid: 2f624ce0881515f46b815f3f52609002, type: 3}
   Level: 1
+  Boss: {fileID: 4902540755278305473, guid: 9088d450cbfb89c4dabebcf4f0dcc4cb, type: 3}
+  player: {fileID: 0}
+  UIManager: {fileID: 0}
+  Direction: 
   dmg: 6
+  patternIndex: 0
+  curPatternCount: 0
+  maxPatternCount: 

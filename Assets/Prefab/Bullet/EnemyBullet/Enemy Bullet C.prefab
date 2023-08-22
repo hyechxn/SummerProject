@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 538196968288891567}
   m_Layer: 0
   m_Name: Enemy Bullet C
-  m_TagString: EnemyBullet
+  m_TagString: Bossbullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,8 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 2378835644085557570}
-  dmg: 10
+  dmg: 20
   bulletLevel: 1
+  isRotate: 1
 --- !u!70 &538196968288891567
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,6 +137,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00177145, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.85, y: 0.85}
   m_Direction: 0

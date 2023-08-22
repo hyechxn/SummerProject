@@ -9,9 +9,11 @@ TagManager:
   - PlayerBullet
   - Bullet
   - EnemyBullet
-  - MIne
   - Item
   - ItemSpawn
+  - UIManager
+  - Mine
+  - Bossbullet
   layers:
   - Default
   - TransparentFX

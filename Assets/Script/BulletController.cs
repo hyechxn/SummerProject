@@ -8,6 +8,7 @@ public class BulletController: MonoBehaviour
     public GameObject Bullet;
     public int dmg;
     public int bulletLevel;
+    public bool isRotate;
     void Awake()
     {
         if (this.tag =="PlayerBullet")
@@ -32,8 +33,14 @@ public class BulletController: MonoBehaviour
         }
         if (this.tag == "EnemyBullet")
         {
-            
-            GetComponent<Rigidbody2D>().AddForce(Vector2.down * BulletSpeed);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.down * BulletSpeed / 2);
+        }
+    }
+
+    void Update()
+    {
+        if (isRotate) {
+            transform.Rotate(Vector3.forward * 10);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -43,7 +50,7 @@ public class BulletController: MonoBehaviour
     }
     private void OnTriggerrEnter2D(Collider2D collision)
     {
-        if (gameObject.tag == "EnemyBullet"&& collision.tag == "Player")
+        if ((this.tag == "EnemyBullet")||(this.tag == "Bossbullet")&& collision.tag == "Player")
         {
             Destroy(gameObject);
         }

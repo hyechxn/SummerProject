@@ -101,7 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: []
   thisType: 
+  ui: {fileID: 0}
   item: {fileID: 4191231183202844505, guid: d7524237136d0d543adfa915d1208505, type: 3}
+  painBar: {fileID: 0}
 --- !u!58 &2303445718783438478
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +114,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

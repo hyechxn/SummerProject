@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public Vector3 playerPosition;
-    private float moveSpeed = 8f;
+    private float moveSpeed = 6f;
     private SpriteRenderer spriteRenderer;
     public int bulletLevel = 1;
 
@@ -30,31 +30,39 @@ public class PlayerController : MonoBehaviour
 
     public UI ui;
     public UI score;
+    public UI pain;
+    public UI NameOfItem;
 
     public int HP=200;
     public int maxHP=200;
     public GameObject hpBar;
     public GameObject scoreBar;
+    public GameObject painBar;
+    public GameObject UIManager;
     private Animator anim;
 
     public int Score = 0;
 
     private bool isFire;
-    private float delayTime = 0.1f;
+    private float delayTime = 0.15f;
     private float delay;
+
+    public bool isItem;
     void Awake()
     {
-        ui = scoreBar.GetComponent<UI>();
+        NameOfItem = UIManager.GetComponent<UI>(); 
+        pain = painBar.GetComponent<UI>();
+        score = scoreBar.GetComponent<UI>();
         ui = hpBar.GetComponent<UI>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerPosition = transform.position;
+        
     }
 
     void Update()
     {
-        ui.score = Score;
         Move();
         Fire();
     }
@@ -87,7 +95,7 @@ public class PlayerController : MonoBehaviour
 {
         if (isFire == false)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
                 if (bulletLevel == 1)
                 {
@@ -157,48 +165,54 @@ public class PlayerController : MonoBehaviour
             if (isHIt==false)
             {
                 OnHit();
-                ui.CurHp -= other.GetComponent<Enemy>().dmg / 2;
+                NameOfItem.CurHp -= other.GetComponent<Enemy>().dmg / 2;
             }
         }
-        if (other.gameObject.tag == "EnemyBullet")
+        if (other.gameObject.tag == "EnemyBullet"||other.gameObject.tag == "Bossbullet")
         {
             if (isHIt==false)
             {
                 OnHit();
-                ui.CurHp -= other.GetComponent<BulletController>().dmg;
+                NameOfItem.CurHp -= other.GetComponent<BulletController>().dmg;
                 Destroy(other.gameObject);
             }
         }
         if (other.gameObject.tag == "Item")
         {
+            NameOfItem.isItem = true;
             Item item = other.GetComponent<Item>();
             switch (item.thisType) {
                 case "Upgrade":
+                    NameOfItem.nameNameItem = item.thisType;
                     if (bulletLevel < 5)
                         bulletLevel++;
                     else if (bulletLevel >= 5)
                         Score += 2000;
                     break;
                 case "NoHit":
+                    NameOfItem.nameNameItem = item.thisType;
                     ChangeAlpha(0.5f);
                     Invoke("ReturnAlpha", 2.5f);
-                    ChangeAlpha(0.5f);
-                    Invoke("ReturnAlpha", 0.5f);
                     break;
                 case "Healing":
-                    ui.CurHp += 30;
-                    if (ui.CurHp >= 200)
-                        ui.CurHp = 200;
+                    NameOfItem.nameNameItem = item.thisType;
+                    NameOfItem.CurHp += 30;
+                    if (NameOfItem.CurHp >= 200)
+                        NameOfItem.CurHp = 200;
                     break;
                 case "PainDown":
-                    ui.CurPain -= 40;
+                    NameOfItem.nameNameItem = item.thisType;
+                    NameOfItem.CurPain -= 40;
                     break;
+                case "AtkSpeedUp":
+                    NameOfItem.nameNameItem = item.thisType;
+                    if (delayTime > 0.5f)
+                        delayTime -= 0.2f;
+                    break;
+
+
             }
-            Destroy(other.gameObject);
-        }
-        if (other.gameObject.tag == "MIne")
-        {
-            ui.CurPain += 75;
+            NameOfItem.isItem = false;
             Destroy(other.gameObject);
         }
     }
@@ -222,6 +236,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.color = newColor;
         isHIt = true;
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Wall")

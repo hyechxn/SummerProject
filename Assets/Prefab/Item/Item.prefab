@@ -105,7 +105,12 @@ MonoBehaviour:
   - NoHit
   - Healing
   - PainDown
+  - AtkSpeedUp
   thisType: 
+  ui: {fileID: 0}
+  item: {fileID: 0}
+  UIManager: {fileID: 0}
+  Direction: 
 --- !u!50 &4191231183202844509
 Rigidbody2D:
   serializedVersion: 4
