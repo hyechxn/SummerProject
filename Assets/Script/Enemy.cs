@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.TerrainTools;
 
 public class Enemy : MonoBehaviour
 {
     public float speed;
     public int health;
     public Sprite[] sprites;
+    public int roundNum;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigid;
@@ -31,7 +28,7 @@ public class Enemy : MonoBehaviour
     public GameObject UIManager;
     public GameObject gameManager;
 
-  
+
 
     private int score;
     private float directTime = 1f;
@@ -51,8 +48,13 @@ public class Enemy : MonoBehaviour
     private GameManager gm;
     void Awake()
     {
-
-
+        UIManager = GameObject.Find("UI Manager");
+        gameManager = GameObject.Find("GameManager");
+        player = GameObject.Find("Player");
+        um = UIManager.GetComponent<UI>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        initialPlayerPosition = player.transform.position;
+        gm = gameManager.GetComponent<GameManager>();
         BossTrans = Boss.transform;
         rigid = GetComponent<Rigidbody2D>();
         if (Level == 10)
@@ -61,40 +63,74 @@ public class Enemy : MonoBehaviour
         }
         if (Level == 1)
         {
-            score = 200;
-            dmg = 6;
+            if (gm.Stage == 1)
+            {
+                score = 200;
+                dmg = 6;
+                health = 3;
+            }
+            else if (gm.Stage == 2)
+            {
+                score = 400;
+                dmg = 10;
+                health = 5;
+            }
         }
         else if (Level == 2)
         {
-            score = 500;
-            dmg = 10;
+            if (gm.Stage == 1)
+            {
+                score = 500;
+                dmg = 10;
+                health = 6;
+            }
+            else if (gm.Stage == 2)
+            {
+                score = 750;
+                dmg = 10;
+                health = 10;
+            }
         }
         else if (Level == 3)
         {
-            score = 1000;
-            dmg = 20;
+            if (gm.Stage == 1)
+            {
+                score = 1000;
+                dmg = 20;
+                health = 16;
+            }
+            else if (gm.Stage == 2)
+            {
+                score = 4;
+                dmg = 20;
+                health = 25;
+            }
         }
         else if (Level == 10)
         {
-            score = 20000;
-            dmg = 10;
+            if (gm.Stage == 1)
+            {
+                score = 20000;
+                dmg = 10;
+                health = 1000;
+            }
+            else if (gm.Stage == 2)
+            {
+                score = 30000;
+                dmg = 20;
+                health = 2000;
+            }
         }
         if (Level == 10)
         {
             anim = GetComponent<Animator>();
         }
-        UIManager = GameObject.Find("UI Manager");
-        gameManager = GameObject.Find("GameManager");
-        player = GameObject.Find("Player");
-        um = UIManager.GetComponent<UI>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        initialPlayerPosition = player.transform.position;
-        gm = gameManager.GetComponent<GameManager>();
-    }        
+
+    }
 
     void Start()
     {
-        if (Level ==10)
+        if (Level == 10)
         {
             return;
         }
@@ -114,18 +150,20 @@ public class Enemy : MonoBehaviour
             return;
         }
         nextTime += Time.deltaTime;
-        if (nextTime >= directTime) {
+        if (nextTime >= directTime)
+        {
             nextTime = 0;
             RandomDirect();
         }
-        Fire();
+        if (Level != 1)
+            Fire();
     }
 
     void Fire()
     {
         if (isFire == false)
         {
-            if(Level == 1)
+            if (Level == 1)
             {
                 Instantiate(bulletA, transform.position, transform.rotation);
                 isFire = true;
@@ -156,7 +194,12 @@ public class Enemy : MonoBehaviour
 
     void BossThink()
     {
-        patternIndex = patternIndex==3 ? 0 : patternIndex+1;
+
+        if (gm.Stage == 1)
+            patternIndex = patternIndex == 3 ? 0 : patternIndex + 1;
+        if (gm.Stage == 2)
+            patternIndex = Random.Range(0, 4);
+
         curPatternCount = 0;
 
 
@@ -164,19 +207,19 @@ public class Enemy : MonoBehaviour
         {
             case 0:
                 FireFoward();
-                
+
                 break;
             case 1:
                 FireShot();
-               
+
                 break;
             case 2:
                 FireArc();
-                
+
                 break;
             case 3:
                 FireAround();
-                
+
                 break;
         }
     }
@@ -204,17 +247,18 @@ public class Enemy : MonoBehaviour
         else
             Invoke("BossThink", 2.5f);
     }
-    void FireShot() {
-        
+    void FireShot()
+    {
+
         for (int index = 0; index < 8; index++)
         {
             GameObject bullet = Instantiate(bulletC, transform.position, transform.rotation);
 
             Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
             Vector2 dirVec = player.transform.position - transform.position;
-            Vector2 ranVec = new Vector2(Random.Range(-1.0f,1.0f), Random.Range(0f,2.0f));
+            Vector2 ranVec = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(0f, 2.0f));
             dirVec += ranVec;
-            rigid.AddForce(dirVec.normalized*15, ForceMode2D.Impulse);
+            rigid.AddForce(dirVec.normalized * 15, ForceMode2D.Impulse);
         }
         curPatternCount++;
         if (curPatternCount < maxPatternCount[patternIndex])
@@ -224,13 +268,13 @@ public class Enemy : MonoBehaviour
     }
     void FireArc()
     {
-            GameObject bullet = Instantiate(bulletCRotete, transform.position, transform.rotation);
-            bullet.transform.rotation = Quaternion.identity;
+        GameObject bullet = Instantiate(bulletCRotete, transform.position, transform.rotation);
+        bullet.transform.rotation = Quaternion.identity;
 
-            Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-            float angle = (10 * Mathf.PI * curPatternCount) / maxPatternCount[patternIndex] - Mathf.PI / 2;
-            Vector2 dirVec = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            rigid.AddForce(dirVec.normalized * 5, ForceMode2D.Impulse);
+        Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+        float angle = (10 * Mathf.PI * curPatternCount) / maxPatternCount[patternIndex] - Mathf.PI / 2;
+        Vector2 dirVec = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        rigid.AddForce(dirVec.normalized * 5, ForceMode2D.Impulse);
 
         curPatternCount++;
         if (curPatternCount < maxPatternCount[patternIndex])
@@ -240,17 +284,23 @@ public class Enemy : MonoBehaviour
     }
     void FireAround()
     {
-        int roundNumA = 20;
-        int roundNumB = 15;
-        int roundNum = curPatternCount % 2 == 0 ? roundNumA : roundNumB;
-
+        if (gm.Stage == 1)
+        {
+            int roundNumA = 15;
+            int roundNumB = 20;
+            roundNum = curPatternCount % 2 == 0 ? roundNumA : roundNumB;
+        }
+        if (gm.Stage == 2)
+        {
+            roundNum = Random.Range(15, 20);
+        }
         for (int index = 0; index < roundNum; index++)
         {
             GameObject bullet = Instantiate(bulletCRotete, transform.position, transform.rotation);
             bullet.transform.rotation = Quaternion.identity;
 
             Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-            Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 2 * index / roundNum), 
+            Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 2 * index / roundNum),
                                                              Mathf.Sin(Mathf.PI * 2 * index / roundNum));
 
             rigid.AddForce(dirVec.normalized * 2, ForceMode2D.Impulse);
@@ -262,7 +312,14 @@ public class Enemy : MonoBehaviour
 
         curPatternCount++;
         if (curPatternCount < maxPatternCount[patternIndex])
-            Invoke("FireAround", 2f);
+            if (gm.Stage == 1)
+            {
+                Invoke("FireAround", 3);
+            }
+            else
+            {
+                Invoke("FireAround", 0.7f);
+            }
         else
             Invoke("BossThink", 10f);
     }
@@ -291,9 +348,9 @@ public class Enemy : MonoBehaviour
             rigid.velocity = rotatedDirection * speed;
         }
 
-        
 
-        
+
+
     }
     void OnHit(int dmg)
     {
@@ -309,9 +366,11 @@ public class Enemy : MonoBehaviour
         }
         spriteRenderer.sprite = sprites[1];
         Invoke("Resetsprite", 0.05f);
-        if (health <= 0) {
-            um.CurBossHealth = 0;
-            um.score += score;   
+        if (health <= 0)
+        {
+            if (Level == 10)
+                um.CurBossHealth = 0;
+            um.score += score;
             Destroy(gameObject);
         }
     }
@@ -322,9 +381,9 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Wall" && Level != 10) 
+        if (collision.tag == "Wall" && Level != 10)
         {
-            um.CurPain += dmg/2;
+            um.CurPain += dmg / 2;
             Destroy(gameObject);
         }
         else if (collision.tag == "PlayerBullet")
@@ -335,7 +394,7 @@ public class Enemy : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
-    {   
+    {
 
         if (collision.tag == "PlayerBullet")
         {

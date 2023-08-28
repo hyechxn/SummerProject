@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,12 +6,16 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemyObs;
     public Transform[] spawnPoints;
     public GameObject BossEnem;
+    public GameObject BossEnemy;
     public bool isPaused;
     public float maxEnemySpawnDelay;
     private float curEnemySpawnDelay;
 
     public GameObject UIManager;
-    private UI ui;
+    private UI um;
+
+    public int Stage;
+
 
     public int bossCount;
 
@@ -31,10 +31,11 @@ public class GameManager : MonoBehaviour
     public GameObject bossHealthBar;
 
     public int enemyNum;
-
     void Start()
     {
-        ui = UIManager.GetComponent<UI>();
+        
+        Stage = 1;
+        um = UIManager.GetComponent<UI>();
         Time.timeScale = 1.0f;
         isPaused = false;
         resumeButton.onClick.AddListener(Pause);
@@ -45,19 +46,24 @@ public class GameManager : MonoBehaviour
         {
             Pause();
         }
-        if (isBoss == false) {
-            if (bossCount == 40)
+        if (isBoss == false)
+        {
+            if (bossCount >= 10)
             {
                 Vector3 trans = new Vector3(0f, 8f, 0f);
-                Instantiate(BossEnem, trans, transform.rotation);
-                ui.bossHealth.SetActive(true);
+                if (Stage == 1)
+                    Instantiate(BossEnem, trans, transform.rotation);
+                else if (Stage == 2)
+                    Instantiate(BossEnemy, trans, transform.rotation);
+                um.bossHealth.SetActive(true);
                 bossCount = 0;
                 isBoss = true;
             }
             SpawnEnem();
+            SpawnIte();
         }
         GameOverCheck();
-        SpawnIte();
+
     }
     void SpawnIte()
     {
@@ -66,7 +72,7 @@ public class GameManager : MonoBehaviour
         if (curItemSpawnDelay >= maxItemSpawnDelay)
         {
             SpawnItem();
-            maxItemSpawnDelay = Random.Range(7f, 30f);
+            maxItemSpawnDelay = Random.Range(6f, 18f);
             curItemSpawnDelay = 0;
         }
     }
@@ -127,7 +133,8 @@ public class GameManager : MonoBehaviour
         GameObject enemy = Instantiate(enemyObs[enemyNum], spawnPoints[ranPoint].position, spawnPoints[ranPoint].rotation);
         Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
-        if (ranPoint <= 3 && ranPoint > 0) {//front
+        if (ranPoint <= 3 && ranPoint > 0)
+        {//front
             rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
             enemyLogic.Direction = "Front";
         }
@@ -144,9 +151,9 @@ public class GameManager : MonoBehaviour
     }
     void GameOverCheck()
     {
-        if (ui.CurHp <= 0 || ui.CurPain >= 300)
+        if (um.CurHp <= 0 || um.CurPain >= 300)
         {
-            isPaused= true;
+            isPaused = true;
             GameOver();
         }
     }
@@ -164,7 +171,7 @@ public class GameManager : MonoBehaviour
                 script.enabled = !isPaused;
             }
         }
-}
+    }
     void Pause()
     {
         isPaused = !isPaused;

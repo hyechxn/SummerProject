@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
     public Vector3 playerPosition;
     private float moveSpeed = 6f;
     private SpriteRenderer spriteRenderer;
@@ -31,10 +27,10 @@ public class PlayerController : MonoBehaviour
     public UI ui;
     public UI score;
     public UI pain;
-    public UI NameOfItem;
+    public UI um;
 
-    public int HP=200;
-    public int maxHP=200;
+    public int HP = 200;
+    public int maxHP = 200;
     public GameObject hpBar;
     public GameObject scoreBar;
     public GameObject painBar;
@@ -48,9 +44,14 @@ public class PlayerController : MonoBehaviour
     private float delay;
 
     public bool isItem;
+
+    private Rigidbody2D rigid;
+    private bool isAction;
+
     void Awake()
     {
-        NameOfItem = UIManager.GetComponent<UI>(); 
+        isAction = true;
+        um = UIManager.GetComponent<UI>();
         pain = painBar.GetComponent<UI>();
         score = scoreBar.GetComponent<UI>();
         ui = hpBar.GetComponent<UI>();
@@ -58,33 +59,40 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerPosition = transform.position;
-        
-    }
+        rigid = GetComponent<Rigidbody2D>();
 
+    }
+    void Start()
+    {
+        StartAction();
+    }
     void Update()
     {
-        Move();
-        Fire();
+        if (!isAction) {
+            Move();
+            Fire();
+        }
+        
     }
     void Move()
     {
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
-        
 
-        
-        if ((isTouchLeft &&  h == -1) || (isTouchRight && h==1))
-        {     
+
+
+        if ((isTouchLeft && h == -1) || (isTouchRight && h == 1))
+        {
             h = 0;
         }
-        
+
         if ((isTouchTop && v == 1) || (isTouchBottom && v == -1))
         {
             v = 0;
         }
 
-            Vector3 movement = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
-            transform.Translate(movement);
+        Vector3 movement = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
+        transform.Translate(movement);
 
         if ((Input.GetButtonDown("Horizontal")) || (Input.GetButtonUp("Horizontal")))
         {
@@ -92,7 +100,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     void Fire()
-{
+    {
         if (isFire == false)
         {
             if (Input.GetButton("Fire1"))
@@ -110,7 +118,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Instantiate(bulletS, transform.position + Vector3.right * 0.5f, transform.rotation);
                     Instantiate(bulletS, transform.position + Vector3.left * 0.5f, transform.rotation);
-                    Instantiate(bulletM, transform.position + Vector3.up *0.3f, transform.rotation);
+                    Instantiate(bulletM, transform.position + Vector3.up * 0.3f, transform.rotation);
                 }
                 else if (bulletLevel == 4)
                 {
@@ -132,22 +140,23 @@ public class PlayerController : MonoBehaviour
         }
         if (isFire == true)
         {
-            delay+= Time.deltaTime;
+            delay += Time.deltaTime;
         }
         if (delayTime <= delay)
         {
             isFire = false;
-            delay= 0f;
+            delay = 0f;
         }
-        
-}
+
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Wall")
         {
-            switch(other.gameObject.name) {
+            switch (other.gameObject.name)
+            {
                 case "Top":
-                    isTouchTop = true; 
+                    isTouchTop = true;
                     break;
                 case "Bottom":
                     isTouchBottom = true;
@@ -162,57 +171,58 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag == "Enemy")
         {
-            if (isHIt==false)
+            if (isHIt == false)
             {
                 OnHit();
-                NameOfItem.CurHp -= other.GetComponent<Enemy>().dmg / 2;
+                um.CurHp -= other.GetComponent<Enemy>().dmg / 2;
             }
         }
-        if (other.gameObject.tag == "EnemyBullet"||other.gameObject.tag == "Bossbullet")
+        if (other.gameObject.tag == "EnemyBullet" || other.gameObject.tag == "Bossbullet")
         {
-            if (isHIt==false)
+            if (isHIt == false)
             {
                 OnHit();
-                NameOfItem.CurHp -= other.GetComponent<BulletController>().dmg;
+                um.CurHp -= other.GetComponent<BulletController>().dmg;
                 Destroy(other.gameObject);
             }
         }
         if (other.gameObject.tag == "Item")
         {
-            NameOfItem.isItem = true;
+            um.isItem = true;
             Item item = other.GetComponent<Item>();
-            switch (item.thisType) {
+            switch (item.thisType)
+            {
                 case "Upgrade":
-                    NameOfItem.nameNameItem = item.thisType;
+                    um.nameNameItem = item.thisType;
                     if (bulletLevel < 5)
                         bulletLevel++;
                     else if (bulletLevel >= 5)
                         Score += 2000;
                     break;
                 case "NoHit":
-                    NameOfItem.nameNameItem = item.thisType;
+                    um.nameNameItem = item.thisType;
                     ChangeAlpha(0.5f);
-                    Invoke("ReturnAlpha", 2.5f);
+                    Invoke("ReturnAlpha", 3f);
                     break;
                 case "Healing":
-                    NameOfItem.nameNameItem = item.thisType;
-                    NameOfItem.CurHp += 30;
-                    if (NameOfItem.CurHp >= 200)
-                        NameOfItem.CurHp = 200;
+                    um.nameNameItem = item.thisType;
+                    um.CurHp += 50;
+                    if (um.CurHp >= 200)
+                        um.CurHp = 200;
                     break;
                 case "PainDown":
-                    NameOfItem.nameNameItem = item.thisType;
-                    NameOfItem.CurPain -= 40;
+                    um.nameNameItem = item.thisType;
+                    um.CurPain -= 40;
                     break;
                 case "AtkSpeedUp":
-                    NameOfItem.nameNameItem = item.thisType;
+                    um.nameNameItem = item.thisType;
                     if (delayTime > 0.5f)
                         delayTime -= 0.2f;
                     break;
 
 
             }
-            NameOfItem.isItem = false;
+            um.isItem = false;
             Destroy(other.gameObject);
         }
     }
@@ -257,5 +267,16 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    void StartAction()
+    {
+        rigid.velocity = Vector3.up * 3;
+        Invoke("StopAction", 1.3f);
+    }
+    void StopAction()
+    {
+        rigid.velocity = Vector3.zero;
+        isAction = false;
     }
 }

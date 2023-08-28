@@ -158,10 +158,14 @@ MonoBehaviour:
   - {fileID: 1320212070, guid: 2c059537c7a4e514196e0bafc7171218, type: 3}
   bulletA: {fileID: 5328488215937943154, guid: e4c6c88884d64764db849c50417b6068, type: 3}
   bulletB: {fileID: 2378835644085557570, guid: 2f624ce0881515f46b815f3f52609002, type: 3}
-  Level: 1
+  bulletC: {fileID: 0}
+  bulletC1: {fileID: 0}
+  bulletCRotete: {fileID: 0}
+  Level: 2
   Boss: {fileID: 4902540755278305473, guid: 9088d450cbfb89c4dabebcf4f0dcc4cb, type: 3}
   player: {fileID: 0}
   UIManager: {fileID: 0}
+  gameManager: {fileID: 0}
   Direction: 
   dmg: 10
   patternIndex: 0

@@ -14,6 +14,9 @@ TagManager:
   - UIManager
   - Mine
   - Bossbullet
+  - Fade
+  - BackGround
+  - haha
   layers:
   - Default
   - TransparentFX
