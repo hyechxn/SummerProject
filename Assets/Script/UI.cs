@@ -30,6 +30,9 @@ public class UI : MonoBehaviour
     public GameObject itemTextObject;
     public GameObject bossHealth;
 
+    public GameObject SaveScore;
+    public SaveScore savedScore;
+
     public string nameNameItem;
     public string showItem;
     public bool isItem;
@@ -54,8 +57,10 @@ public class UI : MonoBehaviour
     public bool IsStage2;
 
     public GameObject stageFade;
+
     void Awake()
     {
+        savedScore = SaveScore.GetComponent<SaveScore>();
         gm = gameManager.GetComponent<GameManager>();
         player = GameObject.Find("Player");
         itemTextObject.SetActive(false);
@@ -70,6 +75,8 @@ public class UI : MonoBehaviour
 
     void Update()
     {
+        savedScore.score = score;
+
         tMP.text = score.ToString();
         hpGauge.text = CurHp + " / " + MaxHp;
         painGauge.text = (((float)CurPain / MaxPain) * 100.0f).ToString("0.0") + "%";
@@ -137,7 +144,6 @@ public class UI : MonoBehaviour
         if (gm.Stage == 2 && IsStage2)
         {
             SettingStage2();
-
         }
 
     }

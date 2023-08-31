@@ -844,7 +844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
   m_sharedMaterial: {fileID: -8315085263976874459, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
@@ -979,7 +979,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0000000
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
   m_sharedMaterial: {fileID: 5628501158513686130, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.3
+  m_fontSize: 64
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1203,13 +1203,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e68501281d0c2a40b83d04b09e80b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 
+  score: 0
+  refister: {fileID: 0}
   NameInPut: {fileID: 0}
+  SaveScore: {fileID: 0}
+  savedScore: {fileID: 0}
+  viewScore: {fileID: 0}
   ranker: []
   rankerScore: []
   InputRank:
     name: PlayerRank
-    score: 000000
+    score: 0
   ranks: []
 --- !u!1 &550930409
 GameObject:
@@ -1308,7 +1312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0000000
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
   m_sharedMaterial: {fileID: 5628501158513686130, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
@@ -1335,7 +1339,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.3
+  m_fontSize: 64
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1443,7 +1447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0000000
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
   m_sharedMaterial: {fileID: 5628501158513686130, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
@@ -1470,7 +1474,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.3
+  m_fontSize: 64
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1688,7 +1692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
   m_sharedMaterial: {fileID: -8315085263976874459, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
@@ -1823,7 +1827,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0000000
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
   m_sharedMaterial: {fileID: 5628501158513686130, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
@@ -1850,7 +1854,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.3
+  m_fontSize: 64
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2177,7 +2181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
   m_sharedMaterial: {fileID: -8315085263976874459, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
@@ -2312,7 +2316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
   m_sharedMaterial: {fileID: -8315085263976874459, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
@@ -2433,8 +2437,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e68501281d0c2a40b83d04b09e80b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 
+  score: 0
+  refister: {fileID: 535613659}
   NameInPut: {fileID: 2113391746}
+  SaveScore: {fileID: 0}
+  savedScore: {fileID: 0}
+  viewScore: {fileID: 82947000}
   ranker:
   - {fileID: 378785874}
   - {fileID: 985931732}
@@ -2644,7 +2652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u200B"
+  m_text: "        \u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
   m_sharedMaterial: {fileID: -8315085263976874459, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
@@ -2863,7 +2871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0000000
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
   m_sharedMaterial: {fileID: 5628501158513686130, guid: 0e5797de731ad40489f2d381c5e89450, type: 2}
@@ -2890,7 +2898,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.3
+  m_fontSize: 64
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3329,9 +3337,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1340204364}
         m_TargetAssemblyTypeName: RankManager, Assembly-CSharp
-        m_MethodName: Register
+        m_MethodName: GoMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3445,7 +3453,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922835822}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -3796,7 +3804,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
   m_sharedMaterial: {fileID: -8315085263976874459, guid: d8e945a10a7e0a34c909dbad764d4c68, type: 2}
@@ -3999,7 +4007,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0, g: 0, b: 0, a: 0.7490196}
-  m_Text: 
+  m_Text: '        '
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -4268,9 +4276,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1340204364}
         m_TargetAssemblyTypeName: RankManager, Assembly-CSharp
-        m_MethodName: Register
+        m_MethodName: ReGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

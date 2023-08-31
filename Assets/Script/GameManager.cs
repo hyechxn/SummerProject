@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public float maxEnemySpawnDelay;
     private float curEnemySpawnDelay;
+
+    public int score;
 
     public GameObject UIManager;
     private UI um;
