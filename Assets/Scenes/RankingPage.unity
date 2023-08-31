@@ -1214,7 +1214,6 @@ MonoBehaviour:
   InputRank:
     name: PlayerRank
     score: 0
-  ranks: []
 --- !u!1 &550930409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2458,7 +2457,6 @@ MonoBehaviour:
   InputRank:
     name: Player
     score: 0
-  ranks: []
 --- !u!1 &1404110892
 GameObject:
   m_ObjectHideFlags: 0

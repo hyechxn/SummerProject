@@ -60,6 +60,7 @@ public class UI : MonoBehaviour
 
     void Awake()
     {
+        SaveScore = GameObject.Find("SaveScore");
         savedScore = SaveScore.GetComponent<SaveScore>();
         gm = gameManager.GetComponent<GameManager>();
         player = GameObject.Find("Player");

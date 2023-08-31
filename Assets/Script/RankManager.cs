@@ -9,11 +9,13 @@ public class RankManager : MonoBehaviour
 {
 
     public int score;
-    public Button refister;
+    public Button register;
     public TMP_InputField NameInPut;
 
     public GameObject SaveScore;
     public SaveScore savedScore;
+
+    private int countList;
 
     [SerializeField]
     public TextMeshProUGUI viewScore;
@@ -21,23 +23,40 @@ public class RankManager : MonoBehaviour
     public TextMeshProUGUI[] rankerScore;
 
     public Rank InputRank = new Rank();
-    [SerializeField] List<Rank> ranks = new List<Rank>();
+    [SerializeField] static List<Rank> ranks = new List<Rank>();
 
     private void Awake()
     {
-        
-
 
         SaveScore = GameObject.Find("SaveScore");
         savedScore = SaveScore.GetComponent<SaveScore>();
     }
+
+    private void Start()
+    {
+        score = savedScore.score;
+        viewScore.text = "최종 점수: " + score;
+        if (ranks != null)
+        {
+            if (ranks.Count <= 5)
+            {
+                countList = ranks.Count;
+            }
+            ranks.Sort((a, b) => { return b.score - a.score; });
+            for (int i = 0; i < countList; i++)
+            {
+                ranker[i].text = ranks[i].name;
+                rankerScore[i].text = ranks[i].score.ToString();
+            }
+        }
+    }
     void Update()
     {
 
-        score = savedScore.score ;
-        viewScore.text = "최종 점수: " + savedScore.score.ToString();
-        InputRank.score = score;
         
+        InputRank.score = score;
+        InputRank.name = NameInPut.text;
+
     }
 
     [Serializable]
@@ -59,10 +78,17 @@ public class RankManager : MonoBehaviour
     public void Register()
     {
         InputRank.name = NameInPut.text;
-        refister.interactable = false;
-        ranks.Add(InputRank);
-        ranks.Sort((a, b) => { return a.score - b.score; });
-        for (int i = 0; i < 5; i++) 
+        Rank curRank = new Rank();
+        curRank.score = score;
+        curRank.name = NameInPut.text;
+        register.interactable = false;
+        ranks.Add(curRank);
+        if (ranks.Count <= 5)
+        {
+            countList = ranks.Count;
+        }
+        ranks.Sort((a, b) => { return b.score - a.score; });
+        for (int i = 0; i < countList; i++)
         {
             ranker[i].text = ranks[i].name;
             rankerScore[i].text = ranks[i].score.ToString();
