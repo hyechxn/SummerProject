@@ -138,6 +138,14 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
+        if (health <= 0)
+        {
+            if (Level == 10)
+                um.CurBossHealth = 0;
+            um.score += score;
+            Destroy(gameObject);
+        }
+
         if (Level == 10)
         {
             um.CurBossHealth = health;

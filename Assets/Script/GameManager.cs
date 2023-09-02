@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +12,9 @@ public class GameManager : MonoBehaviour
     private float curEnemySpawnDelay;
 
     public int score;
+
+    public GameObject[] enemys;
+    public Enemy[] enemyScripts;
 
     public GameObject UIManager;
     private UI um;
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
     public int enemyNum;
     void Start()
     {
-        
+
         Stage = 1;
         um = UIManager.GetComponent<UI>();
         Time.timeScale = 1.0f;
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        cheatKey();
         if (Input.GetButtonDown("Cancel"))
         {
             Pause();
@@ -68,6 +71,66 @@ public class GameManager : MonoBehaviour
         GameOverCheck();
 
     }
+
+    private void cheatKey()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            int ranPoint = Random.Range(1, 5);
+            GameObject item = Instantiate(Item[0], spawnPoints[ranPoint].position, spawnPoints[ranPoint].rotation);
+            Rigidbody2D rigid = item.GetComponent<Rigidbody2D>();
+            Item itemLogic = item.GetComponent<Item>();
+            if (ranPoint <= 3 && ranPoint > 0)
+            {//front
+                rigid.velocity = new Vector2(0, 3 * (-1));
+                itemLogic.Direction = "Front";
+            }
+            else if (ranPoint == 0 || ranPoint == 6)//left
+            {
+                rigid.velocity = new Vector2(3, -1);
+                itemLogic.Direction = "Left";
+            }
+            else if (ranPoint == 4 || ranPoint == 5)//right
+            {
+                rigid.velocity = new Vector2(3 * (-1), -1);
+                itemLogic.Direction = "Right";
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            int ranPoint = Random.Range(1, 5);
+            GameObject item = Instantiate(Item[1], spawnPoints[ranPoint].position, spawnPoints[ranPoint].rotation);
+            Rigidbody2D rigid = item.GetComponent<Rigidbody2D>();
+            Item itemLogic = item.GetComponent<Item>();
+            if (ranPoint <= 3 && ranPoint > 0)
+            {//front
+                rigid.velocity = new Vector2(0, 3 * (-1));
+                itemLogic.Direction = "Front";
+            }
+            else if (ranPoint == 0 || ranPoint == 6)//left
+            {
+                rigid.velocity = new Vector2(3, -1);
+                itemLogic.Direction = "Left";
+            }
+            else if (ranPoint == 4 || ranPoint == 5)//right
+            {
+                rigid.velocity = new Vector2(3 * (-1), -1);
+                itemLogic.Direction = "Right";
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            Enemy[] enemyScripts = new Enemy[enemys.Length];
+
+            for (int i = 0; i < enemys.Length; i++)
+            {
+                enemyScripts[i] = enemys[i].GetComponent<Enemy>();
+                enemyScripts[i].health = 0;
+            }
+        }
+    }
+
     void SpawnIte()
     {
         curItemSpawnDelay += Time.deltaTime;

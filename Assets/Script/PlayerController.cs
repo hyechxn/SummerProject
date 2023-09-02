@@ -196,8 +196,8 @@ public class PlayerController : MonoBehaviour
                     um.nameNameItem = item.thisType;
                     if (bulletLevel < 5)
                         bulletLevel++;
-                    else if (bulletLevel >= 5)
-                        Score += 2000;
+                    else 
+                        um.score += 2000;
                     break;
                 case "NoHit":
                     um.nameNameItem = item.thisType;

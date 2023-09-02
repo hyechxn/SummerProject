@@ -1204,7 +1204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  refister: {fileID: 0}
+  register: {fileID: 0}
   NameInPut: {fileID: 0}
   SaveScore: {fileID: 0}
   savedScore: {fileID: 0}
@@ -2437,7 +2437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  refister: {fileID: 535613659}
+  register: {fileID: 535613659}
   NameInPut: {fileID: 2113391746}
   SaveScore: {fileID: 0}
   savedScore: {fileID: 0}
