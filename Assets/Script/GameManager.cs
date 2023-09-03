@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     public GameObject UIManager;
     private UI um;
 
+    public GameObject buletLevelChanger;
+    public GameObject healthChanger;
+    public GameObject painChanger;
+
     public int Stage;
 
 
@@ -70,6 +74,18 @@ public class GameManager : MonoBehaviour
         }
         GameOverCheck();
 
+
+        Time.timeScale = isPaused ? 0.0f : 1.0f;
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            MonoBehaviour[] scripts = playerObj.GetComponents<MonoBehaviour>();
+            foreach (MonoBehaviour script in scripts)
+            {
+                script.enabled = !isPaused;
+            }
+        }
     }
 
     private void cheatKey()
@@ -128,6 +144,27 @@ public class GameManager : MonoBehaviour
                 enemyScripts[i] = enemys[i].GetComponent<Enemy>();
                 enemyScripts[i].health = 0;
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+
+            buletLevelChanger.SetActive(true);
+
+            isPaused = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+
+            healthChanger.SetActive(true);
+
+            isPaused = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+
+            painChanger.SetActive(true);
+
+            isPaused = true;
         }
     }
 
