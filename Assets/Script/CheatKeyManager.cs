@@ -15,11 +15,13 @@ public class CheatKeyManager : MonoBehaviour
     public TMP_InputField healthInput;
     public GameObject healthChanger;
 
+    public TMP_InputField stagelevelInput;
+    public GameObject stagelevelChanger;
+
     public GameObject gameManager;
     public GameObject uiManager;
     private GameManager gm;
     private UI um;
-
 
 
     void Awake()
@@ -29,7 +31,7 @@ public class CheatKeyManager : MonoBehaviour
         gm = gameManager.GetComponent<GameManager>();
         um = uiManager.GetComponent<UI>();
     }
-    public void ChangeLevel()
+    public void ChangeBulletLevel()
     {
         if (levelInput != null)
         {
@@ -90,5 +92,25 @@ public class CheatKeyManager : MonoBehaviour
         }
         healthChanger.SetActive(false);
         gm.isPaused = false;
+    }
+
+    public void ChangeLevel()
+    {
+        int level = int.Parse(stagelevelInput.text);
+        
+        if(level == 1)
+        {
+            gm.bossCount = 0;
+            gm.Stage = 1;
+            gm.maxEnemySpawnDelay = 7;
+            gm.maxItemSpawnDelay = 20;
+        }
+        else if (level == 2)
+        {
+            um.Stage1Clear();
+            gm.bossCount = 0;
+            gm.Stage = 2;
+        }
+        stagelevelChanger.SetActive(false);
     }
 }

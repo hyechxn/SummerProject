@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
             }
             else if (gm.Stage == 2)
             {
-                score = 4;
+                score = 1500;
                 dmg = 20;
                 health = 25;
             }

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject buletLevelChanger;
     public GameObject healthChanger;
     public GameObject painChanger;
+    public GameObject levelChanger;
 
     public int Stage;
 
@@ -40,6 +41,12 @@ public class GameManager : MonoBehaviour
     public GameObject bossHealthBar;
 
     public int enemyNum;
+
+
+    private bool isGodMode;
+
+    private int godHealth;
+    private int godPain;
     void Start()
     {
 
@@ -52,6 +59,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         cheatKey();
+        if (isGodMode)
+        {
+            um.CurHp = godHealth;
+            um.CurPain = godPain;
+        }
         if (Input.GetButtonDown("Cancel"))
         {
             Pause();
@@ -166,6 +178,42 @@ public class GameManager : MonoBehaviour
 
             isPaused = true;
         }
+        if (Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            OnGodMode();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+
+            OffGodMode();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad9))
+        {
+            isBoss = true;
+            levelChanger.SetActive(true);
+
+            enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            Enemy[] enemyScripts = new Enemy[enemys.Length];
+
+            for (int i = 0; i < enemys.Length; i++)
+            {
+                Destroy(enemyScripts[i]);
+            }
+        }
+    }
+
+
+
+    public void OnGodMode()
+    {
+        isGodMode = true;
+        godHealth = um.CurHp;
+        godPain = um.CurPain;
+    }
+
+    public void OffGodMode()
+    {
+        isGodMode = false;
     }
 
     void SpawnIte()

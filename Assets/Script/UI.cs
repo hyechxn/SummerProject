@@ -188,7 +188,7 @@ public class UI : MonoBehaviour
         AtkSpeed.SetActive(false);
         nameNameItem = "";
     }
-    void Stage1Clear()
+    public void Stage1Clear()
     {
         stage1Clear.SetActive(true);
         Invoke("GoStage2", 4);
@@ -221,5 +221,6 @@ public class UI : MonoBehaviour
     void Stage2()
     {
         stage2Text.SetActive(false);
+        gm.isBoss = false;
     }
 }
