@@ -2848,7 +2848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {x: 0, y: 0, z: 0}
-  bulletLevel: 5
+  bulletLevel: 1
   bulletS: {fileID: 6455808349593913222, guid: a33871c6653550344a410a6df97bd189, type: 3}
   bulletM: {fileID: 8709128335744624818, guid: 49e7698e57064fb4797a1d13f4d7cddf, type: 3}
   bulletL: {fileID: 5578664322680648325, guid: f66372d08b5e7b949b5821ef53551610, type: 3}

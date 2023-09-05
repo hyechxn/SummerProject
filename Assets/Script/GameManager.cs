@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         }
         if (isBoss == false)
         {
-            if (bossCount >= 10)
+            if (bossCount >= 60)
             {
                 Vector3 trans = new Vector3(0f, 8f, 0f);
                 if (Stage == 1)
