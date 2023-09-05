@@ -11695,7 +11695,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1875673193}
         m_TargetAssemblyTypeName: CheatKeyManager, Assembly-CSharp
-        m_MethodName: ChangeLevel
+        m_MethodName: ChangeBulletLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

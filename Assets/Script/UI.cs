@@ -69,7 +69,7 @@ public class UI : MonoBehaviour
         isItem = false;
         painBar.value = 0.1f;
     }
-    private void Start()
+    void Start()
     {
         Invoke("Stage1", 1.5f);
     }
@@ -213,7 +213,10 @@ public class UI : MonoBehaviour
         MaxBossHealth = 2000;
         Invoke("Stage2", 3f);
     }
-    void FalseFade() { stage1Clear.SetActive(false); }
+    void FalseFade()
+    { 
+        stage1Clear.SetActive(false); 
+    }
     void Stage1()
     {
         stage1.SetActive(false);

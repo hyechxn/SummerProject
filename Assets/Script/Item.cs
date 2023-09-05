@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
     public string[] type;
     Rigidbody2D rigid;
     public string thisType;
-    public UI ui;
+    public UI um;
     public GameObject item;
     public GameObject UIManager;
 
@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
         UIManager = GameObject.Find("UI Manager");
         if (UIManager != null)
         {
-            ui = UIManager.GetComponent<UI>();
+            um = UIManager.GetComponent<UI>();
         }
 
         if (gameObject.tag == "Item")
@@ -46,7 +46,7 @@ public class Item : MonoBehaviour
         {
             if (collision.tag == "PlayerBullet"||collision.tag == "Player")
             {
-                ui.CurPain += 30;
+                um.CurPain += 30;
                 if(collision.tag == "PlayerBullet")
                     Destroy(collision.gameObject);
                 Destroy(gameObject);

@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     private int godHealth;
     private int godPain;
-    void Start()
+    void Awake()
     {
 
         Stage = 1;
@@ -61,6 +61,14 @@ public class GameManager : MonoBehaviour
         cheatKey();
         if (isGodMode)
         {
+            if (um.CurHp > godHealth)
+            {
+                godHealth = um.CurHp;
+            }
+            if (um.CurPain <= godPain)
+            {
+                godPain = um.CurPain;
+            }
             um.CurHp = godHealth;
             um.CurPain = godPain;
         }
@@ -192,6 +200,8 @@ public class GameManager : MonoBehaviour
             isBoss = true;
             levelChanger.SetActive(true);
 
+            isPaused = true;
+
             enemys = GameObject.FindGameObjectsWithTag("Enemy");
             Enemy[] enemyScripts = new Enemy[enemys.Length];
 
@@ -199,6 +209,8 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(enemyScripts[i]);
             }
+
+
         }
     }
 

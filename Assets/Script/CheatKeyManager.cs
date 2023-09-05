@@ -1,5 +1,7 @@
+using System.Globalization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheatKeyManager : MonoBehaviour
 {
@@ -96,14 +98,11 @@ public class CheatKeyManager : MonoBehaviour
 
     public void ChangeLevel()
     {
-        int level = int.Parse(stagelevelInput.text);
+        int level = int.Parse(stagelevelInput.text, CultureInfo.InvariantCulture);
         
         if(level == 1)
         {
-            gm.bossCount = 0;
-            gm.Stage = 1;
-            gm.maxEnemySpawnDelay = 7;
-            gm.maxItemSpawnDelay = 20;
+            SceneManager.LoadScene("Stage1");
         }
         else if (level == 2)
         {
@@ -112,5 +111,6 @@ public class CheatKeyManager : MonoBehaviour
             gm.Stage = 2;
         }
         stagelevelChanger.SetActive(false);
+        gm.isPaused = false;
     }
 }
